@@ -1,0 +1,31 @@
+{% extends 'home.html' %}
+
+{% block content %}
+    <div class="col-md-3">
+    {% load mytag %}
+    {% index username %}
+    </div>
+    <div class="col-md-9">
+        <ul class="media-list">
+         {% for article in article_list %}
+          <li class="media">
+              <a href="/{{ article.blog.userinfo.username }}/article/{{ article.pk }}">{{ article.title }}</a>
+            <div class="media-left">
+              <a href="#">
+                <img class="media-object" src="/media/{{ article.blog.userinfo.avatar }}" width="45" alt="...">
+              </a>
+            </div>
+            <div class="media-body">
+              {{ article.desc }}
+            </div>
+              <span><a href="/{{ article.blog.userinfo.username }}/">{{ article.blog.userinfo.username }}</a></span>
+              <span>发布于&nbsp;&nbsp;{{ article.create_time|date:'Y-m-d' }}</span>
+              <span><span class="glyphicon glyphicon-comment"></span>评论数（{{ article.comment_num}}）</span>
+              <span><span class="glyphicon glyphicon-thumbs-up"></span>点赞数（{{ article.up_num }}）</span>
+              <span><a href="/great/">編輯</a></span>
+          </li>
+             <hr>
+         {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
